@@ -26,6 +26,7 @@ You can now close the WSL terminal and use the built-in VSCode terminal.
 ### Django Installation
 It is recommended to work in a virtual environment. Inside the project folder:
 ```
+sudo apt install python3.8-venv
 python3 -m venv .venv
 ```
 If using virtual environment, run the following command **the first time and every time** you quit your environment and re-enter:
@@ -38,6 +39,7 @@ Install Django:
 ```
 python3 -m pip install django
 pip install python-dotenv
+pip install djangorestframework
 ```
 To run the project, in the base directory use:
 ```
