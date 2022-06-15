@@ -41,7 +41,13 @@ python3 -m pip install django
 pip install python-dotenv
 pip install djangorestframework
 ```
-To run the project, in the base directory use:
+
+cd into the frontend folder and run:
+```
+npm run build
+```
+
+To run the project, cd back to the base directory and run:
 ```
 python manage.py runserver
 ```
