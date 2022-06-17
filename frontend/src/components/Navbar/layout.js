@@ -4,9 +4,9 @@ import { GlobalStyle } from '../styles/GlobalStyles';
 const layout = ({children}) => {
   return (
     <>
-    <GlobalStyle />
-    <Navbar />
-    <main>{children}</main>
+      <GlobalStyle />
+      <Navbar />
+      <main>{children}</main>
     </>
   )
 }
