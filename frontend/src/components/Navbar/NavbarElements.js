@@ -36,3 +36,30 @@ export const Bars = styled(FaBars)`
         cursor: pointer;
     }
 `
+
+export const NavMenu = styled.div`
+    display: flex;
+    align-items: center;
+    margin-right: -48px;
+
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+`
+
+export const menuData = [
+    {title: "About", link: "/about"},
+    {title: "Trips", link: "/trips"},
+    {title: "Itinerary", link: "/itinerary"},
+    {title: "Contact", link: "/contact"},
+]
+
+export const NavBtn = styled.div`
+    display: flex;
+    align-items: center;
+    margin-right: 24px;
+
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+`

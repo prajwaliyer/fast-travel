@@ -1,5 +1,6 @@
 import React from 'react'
-import { Nav, NavLink, Bars } from './NavbarElements';
+import { Button } from '../Button/ButtonElements';
+import { Nav, NavLink, Bars, NavMenu, menuData, NavBtn } from './NavbarElements';
 
 const Navbar = () => {
   return (
@@ -7,6 +8,16 @@ const Navbar = () => {
         <Nav>
             <NavLink to="/">Home</NavLink>
             <Bars />
+            <NavMenu>
+              {menuData.map((item, index) => (
+                <NavLink to={item.link} key={index}>
+                  {item.title}
+                </NavLink>
+              ))}
+            </NavMenu>
+            <NavBtn>
+              <Button primary="true" round="true" to="/sign-in">Sign In</Button>
+            </NavBtn>
         </Nav>
     </>
   )
