@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <>
         <Nav>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/"><b>FAST TRAVEL</b></NavLink>
             <Bars />
             <NavMenu>
               {menuData.map((item, index) => (
