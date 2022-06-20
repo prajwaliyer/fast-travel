@@ -1,8 +1,7 @@
 import React from 'react'
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Button } from '../components/Button/ButtonElements';
+import { Button } from '../Button/ButtonElements';
 import { HeroContainer, HeroBg, VideoBg, HeroContent, HeroItems, HeroH1, HeroP } from './HeroElements';
-import Video from '../assets/hero-cherry-blossom.mp4'
+import Video from '../../assets/hero-cherry-blossom.mp4';
 
 const Hero = () => {
   return (
@@ -14,9 +13,7 @@ const Hero = () => {
           <HeroItems>
             <HeroH1>Fast Travel</HeroH1>
             <HeroP>Find all your travel needs in one place</HeroP>
-            <Router>
-              <Button primary="true" big="true" round="true" to="/sign-in">Start planning</Button>
-            </Router>
+            <Button primary="true" big="true" round="true" to="/sign-in">Start planning</Button>
           </HeroItems>
         </HeroContent>
     </HeroContainer>
