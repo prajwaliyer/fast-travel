@@ -5,6 +5,7 @@ import Trips from "./components/Views/Trips/Trips";
 import Itinerary from "./components/Views/Itinerary/Itinerary";
 import Contact from "./components/Views/Contact/Contact";
 import SignIn from "./components/Views/SignIn/SignIn";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
