@@ -17,9 +17,9 @@
           <div class="col-md-5 p-3">
                 <h1>Welcome to Fast Travel</h1>
                 {% if user.is_authenticated %}
-                <p>Howdy {{ user.username }} !</p>
+                <p><h3> Howdy {{ user.username }} !</h3></p>
                 {% else %}
-                <h1>Howdy User, kindly log in to avail our services</h1>
+                <h3>Not logged in</h3>
                 {% endif %}
           </div>
         </div>
