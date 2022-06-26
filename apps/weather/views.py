@@ -4,12 +4,14 @@ import json
 import os
 import dotenv
 from pathlib import Path
+from rest_framework.response import Response
+import requests
 
 def index(request):
     if request.method == 'POST':
         city = request.POST['city']
 
-        # API key
+        # Get API key from environment file
         BASE_DIR = Path(__file__).resolve().parent.parent
         dotenv_file = os.path.join(BASE_DIR, ".env")
         if os.path.isfile(dotenv_file):
@@ -19,7 +21,7 @@ def index(request):
         # API call
         source = urllib.request.urlopen('https://api.openweathermap.org/data/2.5/weather?q=' \
             + city + '&units=metric&appid=' + WEATHER_KEY).read()
-
+        
         list_of_data = json.loads(source)
 
         data = {
@@ -30,8 +32,13 @@ def index(request):
             "icon" : str(list_of_data['weather'][0]['icon']),
         }
         print(data)
+        
+        # Response to Request posts data to local API
+        res = requests.post('http://127.0.0.1:8000/api/weathers/', data)
     
     else:
         data = {}
+        res = {}
 
     return render(request, "main/index.html", data)
+    # return Response(res.json())

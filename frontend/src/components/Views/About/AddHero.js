@@ -16,6 +16,7 @@ const AddHero = ({ onAdd }) => {
     API.get("/")
       .then((res) => {
         setHeroes(res.data);
+        console.log("Custom: GET request sent");
       })
       .catch(console.error);
   };
@@ -24,15 +25,18 @@ const AddHero = ({ onAdd }) => {
     e.preventDefault();
     let item = { name, alias };
     API.post("/", item).then(() => refreshHeroes());
+    console.log("Custom: POST request sent");
   };
 
   const onUpdate = (id) => {
     let item = { name, alias };
     API.patch(`/${id}/`, item).then((res) => refreshHeroes());
+    console.log("Custom: PATCH request sent");
   };
 
   const onDelete = (id) => {
     API.delete(`/${id}/`).then((res) => refreshHeroes());
+    console.log("Custom: DELETE request sent");
   };
 
   function selectHero(id) {
