@@ -9,4 +9,4 @@ class HeroSerializer(serializers.ModelSerializer):
 class WeatherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Weather
-        fields = ('id', 'country_code', 'temp', 'humidity', 'main', 'icon')
+        fields = ('id', 'city', 'country_code', 'temp', 'humidity', 'main', 'icon')

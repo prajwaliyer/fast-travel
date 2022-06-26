@@ -9,11 +9,12 @@ class Hero(models.Model):
         return self.name
 
 class Weather(models.Model):
-    country_code = models.CharField(max_length=60)
-    temp = models.CharField(max_length=60)
-    humidity = models.CharField(max_length=60)
-    main = models.CharField(max_length=60)
-    icon = models.CharField(max_length=60)
+    city = models.CharField(max_length=60, default='')
+    country_code = models.CharField(max_length=60, default='')
+    temp = models.CharField(max_length=60, default='')
+    humidity = models.CharField(max_length=60, default='')
+    main = models.CharField(max_length=60, default='')
+    icon = models.CharField(max_length=60, default='')
     
     def __str__(self):
         return self.name
