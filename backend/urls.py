@@ -9,5 +9,4 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('api.urls')),
     path('weather/', include('apps.weather.urls')),
-    path('weather/index/', index)    
 ]

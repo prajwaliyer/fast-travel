@@ -7,7 +7,7 @@ from pathlib import Path
 from rest_framework.response import Response
 import requests
 
-def index2(request):
+def index(request):
     # if request.method == 'POST':
         # city = request.POST['city']
 
