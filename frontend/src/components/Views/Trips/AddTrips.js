@@ -4,7 +4,11 @@ import API from "../../../API";
 
 const AddTrips = ({ onAdd }) => {
   const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
   const [temp, setTemp] = useState("");
+  const [humidity, setHumidity] = useState("");
+  const [main, setMain] = useState("");
+  const [icon, setIcon] = useState("");
   const [cityId, setCityId] = useState(null);
   const [cities, setCities] = useState([]);
 
@@ -87,7 +91,11 @@ const AddTrips = ({ onAdd }) => {
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">City</th>
+                <th scope="col">Country</th>
                 <th scope="col">Temperature</th>
+                <th scope="col">Humidity</th>
+                <th scope="col">Main</th>
+                <th scope="col">Icon</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -97,7 +105,11 @@ const AddTrips = ({ onAdd }) => {
                   <tr key="">
                     <th scope="row">{city.id}</th>
                     <td>{city.city}</td>
+                    <td>{city.country}</td>
                     <td>{city.temp}</td>
+                    <td>{city.humidity}</td>
+                    <td>{city.main}</td>
+                    <td>{city.icon}</td>
                     <td>
                       <Button
                         variant="primary"

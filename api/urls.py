@@ -1,9 +1,13 @@
 from rest_framework.routers import DefaultRouter
 from .views import HeroViewSet
-from .views import WeatherViewSet
+from .weather import weather_all, weather_one
+from django.urls import path
 
 router = DefaultRouter()
 router.register(r'heroes', HeroViewSet, basename='hero')
-router.register(r'weather', WeatherViewSet, basename='weather')
 
-urlpatterns = router.urls
+urlpatterns = [
+    *router.urls,
+    path('weather/', weather_all),
+    path('weather/<int:pk>/', weather_one)
+]
