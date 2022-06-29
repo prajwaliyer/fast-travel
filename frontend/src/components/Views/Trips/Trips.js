@@ -1,9 +1,12 @@
 import React from 'react'
+import Navbar from '../../Navbar/Navbar';
+import AddTrips from './AddTrips';
 
 function Trips() {
     return (
       <>
-        <h1>Trips Page</h1>
+        <Navbar />
+        <AddTrips />
       </>
     );
   }

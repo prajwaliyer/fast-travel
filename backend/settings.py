@@ -42,7 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # third party
     'rest_framework',
+    'corsheaders',
+
+    #own
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +137,14 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        
+    )
+}
+
+# CORS_ORIGIN_WHITELIST = (
+#     'http://localhost:3000',
+# )

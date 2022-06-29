@@ -1,10 +1,11 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from "./components/Views/Home/Home";
 import About from "./components/Views/About/About";
 import Trips from "./components/Views/Trips/Trips";
 import Itinerary from "./components/Views/Itinerary/Itinerary";
 import Contact from "./components/Views/Contact/Contact";
 import SignIn from "./components/Views/SignIn/SignIn";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

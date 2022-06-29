@@ -1,11 +1,26 @@
-import React from 'react'
+import AddHero from './AddHero'
+import Navbar from '../../Navbar/Navbar'
 
-const About = () => {
+function About() {
   return (
     <>
-      <h1>About Page</h1>
+      <Navbar />
+      <AddHero />
     </>
-  )
+  );  
 }
 
-export default About
+export default About;
+
+// import React from "react";
+
+// const About = () => {
+//   return (
+//     <>
+//       <h1>About Page</h1>
+//     </>
+//   )
+// }
+
+// export default About;
+
