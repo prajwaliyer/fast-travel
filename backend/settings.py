@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     # third party
     'rest_framework',
     'corsheaders',
-    'apps.weather',
 
     #own
     'api.apps.ApiConfig',
