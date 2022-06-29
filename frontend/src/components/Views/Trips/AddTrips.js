@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import API from "../../../API";
 
 const AddTrips = ({ onAdd }) => {
-  const [city, setCity] = useState("");
+  const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [temp, setTemp] = useState("");
   const [humidity, setHumidity] = useState("");
@@ -27,13 +27,13 @@ const AddTrips = ({ onAdd }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    let item = { city };
+    let item = { name, country, temp, humidity, main, icon };
     API.post("weather/", item).then(() => refreshCities());
     console.log("Custom: POST request sent");
   };
 
   const onUpdate = (id) => {
-    let item = { city };
+    let item = { name, country, temp, humidity, main, icon };
     API.patch(`weather/${id}/`, item).then((res) => refreshCities());
     console.log("Custom: PATCH request sent");
   };
@@ -45,7 +45,12 @@ const AddTrips = ({ onAdd }) => {
 
   function selectCity(id) {
     let item = cities.filter((city) => city.id === id)[0];
-    setCity(item.city);
+    setName(item.name);
+    setCountry(item.country);
+    setTemp(item.temp);
+    setHumidity(item.humidity);
+    setMain(item.main);
+    setIcon(item.icon);
     setCityId(item.id);
   }
 
@@ -56,12 +61,12 @@ const AddTrips = ({ onAdd }) => {
           <h3 className="float-left">Create a new City</h3>
           <Form onSubmit={onSubmit} className="mt-4">
             <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>City</Form.Label>
+              <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter City"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </Form.Group>
 
@@ -90,7 +95,7 @@ const AddTrips = ({ onAdd }) => {
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">City</th>
+                <th scope="col">City Name</th>
                 <th scope="col">Country</th>
                 <th scope="col">Temperature</th>
                 <th scope="col">Humidity</th>
@@ -104,12 +109,12 @@ const AddTrips = ({ onAdd }) => {
                 return (
                   <tr key="">
                     <th scope="row">{city.id}</th>
-                    <td>{city.city}</td>
+                    <td>{city.name}</td>
                     <td>{city.country}</td>
                     <td>{city.temp}</td>
                     <td>{city.humidity}</td>
                     <td>{city.main}</td>
-                    <td>{city.icon}</td>
+                    <td><img src={`http://openweathermap.org/img/w/${city.icon}.png`} alt="404" /></td>
                     <td>
                       <Button
                         variant="primary"

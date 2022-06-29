@@ -25,30 +25,28 @@ def weather_all(request):
     if request.method == 'GET':
         queryset = Weather.objects.all()
         serializer_class = WeatherSerializer(queryset, many=True)
-        print("GET request triggered")
         return Response(serializer_class.data)
     
     # API querying on POST request
     elif request.method == 'POST':
 
-        city = request.data['city']
+        city = request.data['name']
 
         # API call with city name
         source = urllib.request.urlopen('https://api.openweathermap.org/data/2.5/weather?q=' \
             + city + '&units=metric&appid=' + WEATHER_KEY).read()
         list_of_data = json.loads(source)
 
-        # Get rest of data for city name
-        request.data['country_code'] = str(list_of_data['sys']['country'])
-        request.data['temp'] = str(list_of_data['main']['temp']) + '°C'
-        request.data['humidity'] = str(list_of_data['main']['humidity'])
+        # Get rest of data for city name~
+        request.data['country'] = str(list_of_data['sys']['country'])
+        request.data['temp'] = str(round(list_of_data['main']['temp'])) + '°C'
+        request.data['humidity'] = str(list_of_data['main']['humidity']) + '%'
         request.data['main'] = str(list_of_data['weather'][0]['main'])
-        request.data['icon'] : str(list_of_data['weather'][0]['icon'])
+        request.data['icon'] = str(list_of_data['weather'][0]['icon'])
 
         # POST data
         serializer_class = WeatherSerializer(data=request.data)
         if serializer_class.is_valid():
-            print(serializer_class.validated_data)
             serializer_class.save()
             return Response(serializer_class.data, status=status.HTTP_201_CREATED)
 

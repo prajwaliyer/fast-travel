@@ -9,8 +9,8 @@ class Hero(models.Model):
         return self.name
 
 class Weather(models.Model):
-    city = models.CharField(max_length=60, default='')
-    country_code = models.CharField(max_length=60, default='')
+    name = models.CharField(max_length=60, default='')
+    country = models.CharField(max_length=60, default='')
     temp = models.CharField(max_length=60, default='')
     humidity = models.CharField(max_length=60, default='')
     main = models.CharField(max_length=60, default='')
