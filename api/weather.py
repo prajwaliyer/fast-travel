@@ -37,7 +37,7 @@ def weather_all(request):
             + city + '&units=metric&appid=' + WEATHER_KEY).read()
         list_of_data = json.loads(source)
 
-        # Get rest of data for city name~
+        # Get rest of data for city name
         request.data['country'] = str(list_of_data['sys']['country'])
         request.data['temp'] = str(round(list_of_data['main']['temp'])) + '°C'
         request.data['humidity'] = str(list_of_data['main']['humidity']) + '%'

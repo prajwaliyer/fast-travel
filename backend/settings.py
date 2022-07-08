@@ -32,9 +32,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
-CORS_ORIGIN_ALLOW_ALL = True
-
+ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1', 'api.openweathermap.org']
 
 # Application definition
 
@@ -50,7 +48,6 @@ INSTALLED_APPS = [
     # third party
     'rest_framework',
     'corsheaders',
-    'apps.oauth',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -58,6 +55,7 @@ INSTALLED_APPS = [
 
     #own
     'api.apps.ApiConfig', 
+    'apps.oauth',
 ]
 
 MIDDLEWARE = [
@@ -162,9 +160,6 @@ REST_FRAMEWORK = {
     )
 }
 
-# CORS_ORIGIN_WHITELIST = (
-#     'http://localhost:3000',
-# )
 SITE_ID = 2
 LOGIN_REDIRECT_URL = '/'
 
