@@ -3,7 +3,8 @@ import { NavLink as Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 
 export const Nav = styled.nav`
-    background: red;
+    box-sizing: border-box;
+    background: ${props => props.theme.background};
     height: 80px;
     display: flex;
     justify-content: space-between;
@@ -11,6 +12,18 @@ export const Nav = styled.nav`
     z-index: 100;
     position: relative;
 `
+Nav.defaultProps = {
+    theme: {
+        background: "black"
+    }
+}
+
+export const themeHome = {
+    background: "transparent"
+};
+export const themeOther = {
+    background: "black"
+};
 
 export const NavLink = styled(Link)`
     color: #fff;
