@@ -17,9 +17,6 @@
     "HEROKU_BRANCH": {
       "required": true
     },
-    "HEROKU_POSTGRESQL_YELLOW_URL": {
-      "required": true
-    },
     "SECRET_KEY": {
       "required": true
     },
