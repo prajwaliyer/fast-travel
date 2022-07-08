@@ -33,8 +33,6 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = False
 
 ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
-CORS_ORIGIN_ALLOW_ALL = True
-
 
 # Application definition
 
@@ -162,9 +160,6 @@ REST_FRAMEWORK = {
     )
 }
 
-# CORS_ORIGIN_WHITELIST = (
-#     'http://localhost:3000',
-# )
 SITE_ID = 2
 LOGIN_REDIRECT_URL = '/'
 
