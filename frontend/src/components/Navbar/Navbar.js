@@ -16,7 +16,7 @@ const Navbar = () => {
               ))}
             </NavMenu>
             <NavBtn>
-              <Button primary="true" round="true" to="/sign-in">Sign In</Button>
+              <Button primary="true" round="true" to="/sign-in/">Sign In</Button>
             </NavBtn>
         </Nav>
     </>

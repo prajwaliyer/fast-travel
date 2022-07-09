@@ -4,7 +4,6 @@ import About from "./components/Views/About/About";
 import Trips from "./components/Views/Trips/Trips";
 import Itinerary from "./components/Views/Itinerary/Itinerary";
 import Contact from "./components/Views/Contact/Contact";
-import SignIn from "./components/Views/SignIn/SignIn";
 
 function App() {
   return (
@@ -16,7 +15,6 @@ function App() {
           <Route exact path="/trips" element={<Trips/>} />
           <Route exact path="/itinerary" element={<Itinerary/>} />
           <Route exact path="/contact" element={<Contact/>} />
-          {/* <Route exact path="/sign-in" element={<SignIn/>} /> */}
           <Route exact path="/sign-in"/>
         </Routes>
       </Router>

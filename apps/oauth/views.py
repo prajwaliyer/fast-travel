@@ -3,5 +3,4 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    # return HttpResponse('<h1> SIGN IN PAGE</h1>')
     return render(request, 'main/sign_test.html')
