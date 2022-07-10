@@ -37,18 +37,12 @@ def weather_all(request):
             + city + '&units=metric&appid=' + WEATHER_KEY).read()
         list_of_data = json.loads(source)
 
-        # Get rest of data for city name~
-        # request.data['country'] = str(list_of_data['sys']['country'])
-        # request.data['temp'] = str(round(list_of_data['main']['temp'])) + '°C'
-        # request.data['humidity'] = str(list_of_data['main']['humidity']) + '%'
-        # request.data['main'] = str(list_of_data['weather'][0]['main'])
-        # request.data['icon'] = str(list_of_data['weather'][0]['icon'])
-
-        request.data['country'] = 'test'
-        request.data['temp'] = 'test'
-        request.data['humidity'] = 'test'
-        request.data['main'] = 'test'
-        request.data['icon'] = 'test'
+        # Get rest of data for city name
+        request.data['country'] = str(list_of_data['sys']['country'])
+        request.data['temp'] = str(round(list_of_data['main']['temp'])) + '°C'
+        request.data['humidity'] = str(list_of_data['main']['humidity']) + '%'
+        request.data['main'] = str(list_of_data['weather'][0]['main'])
+        request.data['icon'] = str(list_of_data['weather'][0]['icon'])
 
         # POST data
         serializer_class = WeatherSerializer(data=request.data)
