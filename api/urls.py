@@ -5,7 +5,6 @@ from django.urls import path
 
 router = DefaultRouter()
 router.register(r'heroes', HeroViewSet, basename='hero')
-router.register(r'djweather', HeroViewSet, basename='djweather')
 
 urlpatterns = [
     *router.urls,

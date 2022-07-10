@@ -20,7 +20,6 @@ const AddTrips = ({ onAdd }) => {
     API.get("weather/")
       .then((res) => {
         setCities(res.data);
-        console.log("Custom: GET request sent");
       })
       .catch(console.error);
   };
@@ -34,18 +33,15 @@ const AddTrips = ({ onAdd }) => {
     }).catch(function(error) {
       console.log(error);
     })
-    console.log("Custom: POST request sent");
   };
 
   const onUpdate = (id) => {
     let item = { name, country, temp, humidity, main, icon };
     API.patch(`weather/${id}/`, item).then((res) => refreshCities());
-    console.log("Custom: PATCH request sent");
   };
 
   const onDelete = (id) => {
     API.delete(`weather/${id}/`).then((res) => refreshCities());
-    console.log("Custom: DELETE request sent");
   };
 
   function selectCity(id) {
