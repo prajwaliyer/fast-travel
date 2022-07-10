@@ -21,9 +21,10 @@ def index(request):
             dotenv.load_dotenv(dotenv_file)
         WEATHER_KEY = os.environ['WEATHER_KEY']
 
+        print(WEATHER_KEY)
         # API call
         source = urllib.request.urlopen('https://api.openweathermap.org/data/2.5/weather?q=' \
-            + city + '&units=metric&appid=' + WEATHER_KEY).read()
+            + city + '&units=metric&appid=' + str(WEATHER_KEY)).read()
         
         list_of_data = json.loads(source)
 
