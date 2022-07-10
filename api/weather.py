@@ -32,10 +32,10 @@ def weather_all(request):
 
         city = request.data['name']
 
-        # # API call with city name
-        # source = urllib.request.urlopen('https://api.openweathermap.org/data/2.5/weather?q=' \
-        #     + city + '&units=metric&appid=' + WEATHER_KEY).read()
-        # list_of_data = json.loads(source)
+        # API call with city name
+        source = urllib.request.urlopen('https://api.openweathermap.org/data/2.5/weather?q=' \
+            + city + '&units=metric&appid=' + WEATHER_KEY).read()
+        list_of_data = json.loads(source)
 
         # Get rest of data for city name~
         # request.data['country'] = str(list_of_data['sys']['country'])
