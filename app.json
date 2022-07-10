@@ -22,6 +22,9 @@
     },
     "WEATHER_KEY": {
       "required": true
+    },
+    "POSTGRESQL_PASSWORD": {
+      "required": true
     }
   },
   "formation": {
