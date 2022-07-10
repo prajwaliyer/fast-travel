@@ -38,11 +38,11 @@ def index(request):
         print(data)
         
         # Response to Request posts data to local API
-        res = requests.post('http://127.0.0.1:8000/api/weathers/', data)
+        # res = requests.post('http://127.0.0.1:8000/api/weathers/', data)
     
     else:
         data = {}
-        res = {}
+        # res = {}
 
     return render(request, "main/index.html", data)
     # return Response(res.json())
