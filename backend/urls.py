@@ -11,4 +11,5 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('sign-in/',include('apps.oauth.urls')),
     path('accounts/',include('allauth.urls')),
+    path('weather/', include('apps.weather.urls')),
 ]

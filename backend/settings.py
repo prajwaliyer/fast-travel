@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 
     #own
     'api.apps.ApiConfig', 
+    'apps.weather',
 ]
 
 MIDDLEWARE = [
