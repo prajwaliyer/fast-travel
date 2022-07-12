@@ -18,3 +18,15 @@ class Weather(models.Model):
     
     def __str__(self):
         return self.name
+
+class Attractions(models.Model):
+    name = models.CharField(max_length=60, default='')
+    country = models.CharField(max_length=60, default='')
+    attraction_name = models.CharField(max_length=60, default='')
+    rating = models.CharField(max_length=60, default='')
+    google_url = models.CharField(max_length=60, default='')
+    photo = models.CharField(max_length=600, default='')
+    place_id = models.CharField(max_length=60, default='')
+    
+    def __str__(self):
+        return self.name
