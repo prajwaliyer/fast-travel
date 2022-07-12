@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import JSONField
 
 # Create your models here.
 class Hero(models.Model):
@@ -27,6 +28,7 @@ class Attractions(models.Model):
     google_url = models.CharField(max_length=60, default='')
     photo = models.CharField(max_length=600, default='')
     place_id = models.CharField(max_length=60, default='')
+    attraction_names = JSONField(default=dict)
     
     def __str__(self):
         return self.name

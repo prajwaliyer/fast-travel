@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Card } from "react-bootstrap";
 import API from "../../../API";
 
 const AddAttractions = ({ onAdd }) => {
@@ -94,57 +94,31 @@ const AddAttractions = ({ onAdd }) => {
             </div>
           </Form>
         </div>
-        <div className="col-md-8 m">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">City Name</th>
-                <th scope="col">Country</th>
-                <th scope="col">Attraction Name</th>
-                <th scope="col">Rating</th>
-                <th scope="col">Google URL</th>
-                <th scope="col">Photo</th>
-                <th scope="col">Place ID</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {attractions.map((attraction, index) => {
-                return (
-                  <tr key="">
-                    <th scope="row">{attraction.id}</th>
-                    <td>{attraction.name}</td>
-                    <td>{attraction.country}</td>
-                    <td>{attraction.attraction_name}</td>
-                    <td>{attraction.rating}</td>
-                    <td>{attraction.google_url}</td>
-                    <td><img src={`${attraction.photo}`} width="20" height="20" alt="404" /></td>
-                    <td>{attraction.place_id}</td>
-                    <td>
-                      <Button
-                        variant="primary"
-                        type="button"
-                        onClick={() => selectAttraction(attraction.id)}
-                        className="mx-2"
-                      >
-                        Edit
-                      </Button>
-                      <Button
-                        variant="primary"
-                        type="button"
-                        onClick={() => onDelete(attraction.id)}
-                        className="mx-2"
-                      >
-                        Delete
-                      </Button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+
+        <div display="inline">
+          {attractions.map((attraction, index) => {
+            return (
+              <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={`${attraction.photo}`} width="200" height="200"/>
+                <Card.Body>
+                  <Card.Title>{attraction.attraction_name}</Card.Title>
+                  <Card.Text>
+                    #: {attraction.id} <br />
+                    City Name: {attraction.name} <br />
+                    Country: {attraction.country} <br />
+                    Attraction Name: {attraction.attraction_name} <br />
+                    Rating: {attraction.rating} <br />
+                    Google URL: {attraction.google_url} <br />
+                    Photo: {attraction.photo} <br />
+                    Place ID: {attraction.place_id} <br />
+                  </Card.Text>
+                  <Button variant="primary">See on Google Maps</Button>
+                </Card.Body>
+              </Card>
+            );
+          })}
         </div>
+
       </div>
     </div>
   );
