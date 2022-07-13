@@ -31,27 +31,9 @@ class WeatherSerializer(serializers.ModelSerializer):
 class AttractionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attractions
-        fields = ('id', 'name', 'country', 'attraction_name', 'rating', 'google_url', 'photo', 'place_id', 'attraction_names')
+        fields = ('id', 'city', 'country', 'attraction_names')
         extra_kwargs = {
             'country': {
                 'allow_blank': True,
             },
-            'attraction_name': {
-                'allow_blank': True,
-            },
-            'rating': {
-                'allow_blank': True,
-            },
-            'google_url': {
-                'allow_blank': True,
-            },
-            'photo': {
-                'allow_blank': True,
-            },
-            'place_id': {
-                'allow_blank': True,
-            },
-            # 'attraction_names': {
-            #     'allow_blank': True,
-            # }
         }

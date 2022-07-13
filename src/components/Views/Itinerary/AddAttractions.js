@@ -1,16 +1,12 @@
 import { useState, useEffect } from "react";
-import { Button, Form, Card } from "react-bootstrap";
+import { Button, Form, Card, Row, Container, Text } from "react-bootstrap";
 import API from "../../../API";
 
 const AddAttractions = ({ onAdd }) => {
   
-  const [name, setName] = useState("");
+  const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
-  const [attraction_name, setAttraction_name] = useState("");
-  const [rating, setRating] = useState("");
-  const [google_url, setGoogle_url] = useState("");
-  const [photo, setPhoto] = useState("");
-  const [place_id, setPlace_id] = useState("");
+  const [attraction_names, setAttraction_names] = useState({});
   const [attractionId, setAttractionId] = useState(null);
   const [attractions, setAttractions] = useState([]);
 
@@ -28,7 +24,7 @@ const AddAttractions = ({ onAdd }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    let item = { name, country, attraction_name, rating, google_url, photo, place_id };
+    let item = { city, country, attraction_names };
     API.post("attractions/", item).then(() => refreshAttractions())
     .then(function(response) {
       console.log(response);
@@ -38,7 +34,7 @@ const AddAttractions = ({ onAdd }) => {
   };
 
   const onUpdate = (id) => {
-    let item = { name, country, attraction_name, rating, google_url, photo, place_id };
+    let item = { city, country, attraction_names };
     API.patch(`attractions/${id}/`, item).then((res) => refreshAttractions());
   };
 
@@ -48,13 +44,9 @@ const AddAttractions = ({ onAdd }) => {
 
   function selectAttraction(id) {
     let item = attractions.filter((attraction) => attraction.id === id)[0];
-    setName(item.name);
+    setCity(item.city);
     setCountry(item.country);
-    setAttraction_name(item.lon);
-    setRating(item.lat);
-    setGoogle_url(item.radius);
-    setPhoto(item.rate);
-    setPlace_id(item.xid);
+    setAttraction_names(item.attraction_names);
     setAttractionId(item.id);
   }
 
@@ -69,8 +61,8 @@ const AddAttractions = ({ onAdd }) => {
               <Form.Control
                 type="text"
                 placeholder="Enter City"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
               />
             </Form.Group>
 
@@ -94,28 +86,54 @@ const AddAttractions = ({ onAdd }) => {
             </div>
           </Form>
         </div>
-
-        <div display="inline">
+        
+        <div className="row justify-content-center align-item-center">
           {attractions.map((attraction, index) => {
-            return (
-              <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={`${attraction.photo}`} width="200" height="200"/>
+            return <div className="col-11 col-md-6 col-lg-3 mx-0 mb-4">
+              City: {attraction.city}
+              <Card style={{ width: '18rem' }} key={index}>
+                <Card.Img variant="top" src={`${attraction.attraction_names[0]['photo']}`} width="200" height="200"/>
                 <Card.Body>
-                  <Card.Title>{attraction.attraction_name}</Card.Title>
+                  <Card.Title><b>{attraction.attraction_names[0]['attraction_name']}</b></Card.Title>
                   <Card.Text>
                     #: {attraction.id} <br />
-                    City Name: {attraction.name} <br />
-                    Country: {attraction.country} <br />
-                    Attraction Name: {attraction.attraction_name} <br />
-                    Rating: {attraction.rating} <br />
-                    Google URL: {attraction.google_url} <br />
-                    Photo: {attraction.photo} <br />
-                    Place ID: {attraction.place_id} <br />
+                    City Name: {attraction.city} <br />
                   </Card.Text>
-                  <Button variant="primary">See on Google Maps</Button>
+                  <Button variant="primary">See on Google Maps</Button> 
+                  <Button variant="primary" type="button" onClick={() => onDelete(attraction.id)} className="mx-2">
+                    -
+                  </Button>
                 </Card.Body>
               </Card>
-            );
+              <Card style={{ width: '18rem' }} key={index}>
+                <Card.Img variant="top" src={`${attraction.attraction_names[1]['photo']}`} width="200" height="200"/>
+                <Card.Body>
+                  <Card.Title><b>{attraction.attraction_names[1]['attraction_name']}</b></Card.Title>
+                  <Card.Text>
+                    #: {attraction.id} <br />
+                    City Name: {attraction.city} <br />
+                  </Card.Text>
+                  <Button variant="primary">See on Google Maps</Button> 
+                  <Button variant="primary" type="button" onClick={() => onDelete(attraction.id)} className="mx-2">
+                    -
+                  </Button>
+                </Card.Body>
+              </Card>
+              <Card style={{ width: '18rem' }} key={index}>
+                <Card.Img variant="top" src={`${attraction.attraction_names[2]['photo']}`} width="200" height="200"/>
+                <Card.Body>
+                  <Card.Title><b>{attraction.attraction_names[2]['attraction_name']}</b></Card.Title>
+                  <Card.Text>
+                    #: {attraction.id} <br />
+                    City Name: {attraction.city} <br />
+                  </Card.Text>
+                  <Button variant="primary">See on Google Maps</Button> 
+                  <Button variant="primary" type="button" onClick={() => onDelete(attraction.id)} className="mx-2">
+                    -
+                  </Button>
+                </Card.Body>
+              </Card>
+            </div>
           })}
         </div>
 

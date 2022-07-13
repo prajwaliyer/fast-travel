@@ -31,30 +31,39 @@ def attractions_all(request):
     elif request.method == 'POST':
         
         # Place Search API
-        city = request.data['name']
+        city = request.data['city']
         source_search = urllib.request.urlopen('https://maps.googleapis.com/maps/api/place/textsearch/json?query=' \
-            + city + '+point+of+interest&types=tourist_attraction&language=en&key=' + MAPS_KEY).read()
+            + city + '+tourist+attractions&types=tourist_attraction&language=en&key=' + MAPS_KEY).read()
         list_of_data_search = json.loads(source_search)
-
         request.data['attraction_name'] = str(list_of_data_search['results'][0]['name'])
         request.data['rating'] = str(list_of_data_search['results'][0]['rating'])
         request.data['place_id'] = str(list_of_data_search['results'][0]['place_id'])
 
+        # List of attractions JSON
+        list_attraction_names = {}
+        for i in range(3):
+            
+            # Place Details API
+            place_id = str(list_of_data_search['results'][i]['place_id'])
+            source_details = urllib.request.urlopen('https://maps.googleapis.com/maps/api/place/details/json?place_id=' \
+                + place_id + '&key=' + MAPS_KEY).read()
+            list_of_data_details = json.loads(source_details)
 
-        # Place Photos API
-        photo_reference = str(list_of_data_search['results'][0]['photos'][0]['photo_reference'])
-        # source_photo = urllib.request.urlopen('https://maps.googleapis.com/maps/api/place/photo?photo_reference=' \
-        #     + photo_reference + '&max_width=400&key=' + MAPS_KEY).read()
-        request.data['photo'] = str('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + photo_reference + \
-            '&key=' + MAPS_KEY)
-        print(request.data['photo'])
+            # Place Photos API
+            photo_reference = str(list_of_data_search['results'][i]['photos'][0]['photo_reference'])
+            photo = str('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' \
+                + photo_reference + '&key=' + MAPS_KEY)
+            
+            # JSON with list of attractions and details
+            list_attraction_names[i] = {
+                'attraction_name': str(list_of_data_search['results'][i]['name']),
+                'rating': str(list_of_data_search['results'][i]['rating']),
+                'google_url': str(list_of_data_details['result']['url']),
+                'photo': photo
+            }
 
-        # Place Details API
-        place_id = request.data['place_id']
-        source_details = urllib.request.urlopen('https://maps.googleapis.com/maps/api/place/details/json?place_id=' \
-            + place_id + '&key=' + MAPS_KEY).read()
-        list_of_data_details = json.loads(source_details)
-        request.data['google_url'] = str(list_of_data_details['result']['url'])
+        request.data['attraction_names'] = list_attraction_names
+        print(request.data['attraction_names'])
 
         # POST data
         serializer_class = AttractionsSerializer(data=request.data)
