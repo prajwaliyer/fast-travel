@@ -50,7 +50,8 @@ def hotel_all(request):
         # print(response.text)
         # print("********************************************************************/n")
 
-        dest_id=1506246
+        #dest_id=1506246
+        dest_id=11594
         #PART 2 - GETTING THE HOTEL NAMES
         print("GOT THE DESTINATION ID", dest_id)
 
