@@ -21,9 +21,9 @@ class Weather(models.Model):
 
 class Hotels(models.Model):
     city = models.CharField(max_length=60, default='')
-    hotel = models.CharField(max_length=60, default='')
-    street = models.CharField(max_length=60, default='')
-    country = models.CharField(max_length=60, default='')
+    hotel = models.CharField(max_length=240, default='')
+    street = models.CharField(max_length=240, default='')
+    country = models.CharField(max_length=200, default='')
     
     def __str__(self):
         return self.hotel

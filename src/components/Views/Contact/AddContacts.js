@@ -4,10 +4,10 @@ import API from "../../../API";
 
 const AddContacts = ({ onAdd }) => {
   const [city, setCity] = useState("");
-  const [hotels, setHotels] = useState("");
+  const [hotel, setHotel] = useState("");
   const [street, setStreet] = useState("");
   const [country, setCountry] = useState("");
-  const [table, setTable] = useState("");
+  const [table, setTable] = useState([]);
 
   useEffect(() => {
     refreshHotels();
@@ -23,7 +23,7 @@ const AddContacts = ({ onAdd }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    let item = { city, hotels, street, country };
+    let item = { city, hotel, street, country };
     API.post("hotels/", item).then(() => refreshHotels())
     .then(function(response) {
       console.log(response);
@@ -33,7 +33,7 @@ const AddContacts = ({ onAdd }) => {
   };
 
   const onUpdate = (id) => {
-    let item = { city, hotels, street, country };
+    let item = { city, hotel, street, country };
     API.patch(`hotels/${id}/`, item).then((res) => refreshHotels());
   };
 
@@ -44,7 +44,7 @@ const AddContacts = ({ onAdd }) => {
   function selectCity(id) {
     let item = table.filter((hotel) => hotel.id === id)[0];
     setCity(item.city);
-    setHotels(item.hotels);
+    setHotel(item.hotel);
     setStreet(item.street);
     setCountry(item.country);
   }
@@ -96,17 +96,17 @@ const AddContacts = ({ onAdd }) => {
                 <th scope="col">Country</th>
               </tr>
             </thead>
-            {/* <tbody>
+            <tbody>
               {table.map((hotel, index) => {
                 return (
                   <tr key="">
                     <th scope="row">{hotel.id}</th>
                     <td>{hotel.city}</td>
-                    <td>{hotel.hotels}</td>
+                    <td>{hotel.hotel}</td>
                     <td>{hotel.street}</td>
                     <td>{hotel.country}</td>
-                    <td><img src={`http://openweathermap.org/img/w/${city.icon}.png`} alt="404" /></td>
-                    <td>
+                    {/* <td><img src={`http://openweathermap.org/img/w/${city.icon}.png`} alt="404" /></td> */}
+                     {/* <td>
                       <Button
                         variant="primary"
                         type="button"
@@ -123,11 +123,11 @@ const AddContacts = ({ onAdd }) => {
                       >
                         Delete
                       </Button>
-                    </td>
+                    </td> */}
                   </tr>
                 );
               })}
-            </tbody> */}
+            </tbody> 
           </table>
         </div>
       </div>

@@ -23,12 +23,14 @@ RAPIDAPI_KEY = os.environ['RAPIDAPI_KEY']
 @api_view(['GET', 'POST'])
 def hotel_all(request):
     if request.method == 'GET':
+        print("GETTTTTT REQUESTTTTT")
         queryset = Hotels.objects.all()
         serializer_class = HotelSerializer(queryset, many=True)
         return Response(serializer_class.data)
     
     # API querying on POST request
     elif request.method == 'POST':
+        print("POSTTTTT REQUESTTTT")
         city = request.data['city']
         print("CITY: ", city)
         
@@ -84,6 +86,7 @@ def hotel_all(request):
         request.data['street']=temp2
         request.data['country']=temp3
 
+        print("ABOUT TO POST THE DATA")
         # POST data
         serializer_class = HotelSerializer(data=request.data)
         if serializer_class.is_valid():
