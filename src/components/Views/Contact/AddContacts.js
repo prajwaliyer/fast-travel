@@ -7,6 +7,9 @@ const AddContacts = ({ onAdd }) => {
   const [hotel, setHotel] = useState("");
   const [street, setStreet] = useState("");
   const [country, setCountry] = useState("");
+  const [imgs, setImgs] = useState("");
+  const [landmarks, setLandmarks] = useState("");
+  const [price,setPrice]=useState("")
   const [table, setTable] = useState([]);
 
   useEffect(() => {
@@ -23,7 +26,7 @@ const AddContacts = ({ onAdd }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    let item = { city, hotel, street, country };
+    let item = { city, hotel, street, country, imgs, landmarks, price};
     API.post("hotels/", item).then(() => refreshHotels())
     .then(function(response) {
       console.log(response);
@@ -33,7 +36,7 @@ const AddContacts = ({ onAdd }) => {
   };
 
   const onUpdate = (id) => {
-    let item = { city, hotel, street, country };
+    let item = { city, hotel, street, country, imgs, landmarks, price };
     API.patch(`hotels/${id}/`, item).then((res) => refreshHotels());
   };
 
@@ -47,6 +50,9 @@ const AddContacts = ({ onAdd }) => {
     setHotel(item.hotel);
     setStreet(item.street);
     setCountry(item.country);
+    setImgs(item.imgs);
+    setLandmarks(item.landmarks);
+    setPrice(item.price)
   }
 
   return (
@@ -94,6 +100,10 @@ const AddContacts = ({ onAdd }) => {
                 <th scope="col">Hotel</th>
                 <th scope="col">Street</th>
                 <th scope="col">Country</th>
+                <th scope="col">imgs</th>
+                <th scope="col">landmarks</th>
+                <th scope="col">price</th>
+
               </tr>
             </thead>
             <tbody>
@@ -105,6 +115,10 @@ const AddContacts = ({ onAdd }) => {
                     <td>{hotel.hotel}</td>
                     <td>{hotel.street}</td>
                     <td>{hotel.country}</td>
+                    <td>{hotel.imgs}</td>
+                    <td>{hotel.landmarks}</td>
+                    <td>{hotel.price}</td>
+
                     {/* <td><img src={`http://openweathermap.org/img/w/${city.icon}.png`} alt="404" /></td> */}
                      {/* <td>
                       <Button

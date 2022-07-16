@@ -9,6 +9,7 @@ import json
 import os
 import dotenv
 from pathlib import Path
+import string
 
 # Get API key from environment file
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -66,9 +67,11 @@ def hotel_all(request):
         print(response2.text)
         print("********************************************************************\n")
         results=response2.json()['data']['body']['searchResults']['results']
+        landmarks=response2.json()['data']['body']['filters']['landmarks']['items']
         
         print("SECOND REQUEST IS DONE")
         # Populate the city's fields
+        '''
         temp1=str(results[0]['name'])
         temp2=str(results[0]['address']['streetAddress'])
         temp3=str(results[0]['address']['countryName'])
@@ -77,14 +80,37 @@ def hotel_all(request):
             temp1+=" "+str(results[j]['name'])
             temp2+=" "+str(results[j]['address']['streetAddress'])
             temp3+=" "+str(results[j]['address']['countryName'])
+        '''
+        # Populate the city's fields
+        temp1=string.capwords(str(results[0]['name']))
+        temp2=str(results[0]['address']['streetAddress'])+","+str(results[0]['address']['locality'])
+        temp3=str(results[0]['address']['countryName'])
+        temp4=str(results[0]['optimizedThumbUrls']['srpDesktop'])
+        temp5=str(landmarks[1]['label']+str(landmarks[2]['label']+str(landmarks[3]['label'])))
+        temp6=str(results[0]['ratePlan']['price']['current'])
+
+        for j in range(1,5):
+            temp1+=";"+string.capwords(str(results[j]['name']))
+            temp2+=";"+string.capwords(str(results[j]['address']['streetAddress']))+","+str(results[j]['address']['locality']).capitalize()
+            temp3+=";"+string.capwords(str(results[j]['address']['countryName']))
+            temp4+=";"+str(results[j]['optimizedThumbUrls']['srpDesktop'])
+            temp6+=";"+str(results[j]['ratePlan']['price']['current'])
+
         
         print("HOTEL NAMES: ",temp1)
         print("STREETS: ", temp2)
         print("COUNTRY: ",temp3)
+        print("IMG SOURCE: ",temp4)
+        print("LANDMARKS: ",temp5)
+        print("PRICES: ", temp6)
 
         request.data['hotel']=temp1
         request.data['street']=temp2
         request.data['country']=temp3
+        request.data['imgs']=temp4
+        request.data['landmarks']=temp5
+        request.data['price']=temp5
+
 
         print("ABOUT TO POST THE DATA")
         # POST data
