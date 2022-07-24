@@ -21,7 +21,7 @@ RAPIDAPI_KEY = os.environ['RAPIDAPI_KEY']
 #
 # Requests for multiple JSON objects
 #
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'DELETE'])
 def hotel_all(request):
     if request.method == 'GET':
         print("GETTTTTT REQUESTTTTT")
@@ -109,7 +109,7 @@ def hotel_all(request):
         request.data['country']=temp3
         request.data['imgs']=temp4
         request.data['landmarks']=temp5
-        request.data['price']=temp5
+        # request.data['price']=temp5
 
 
         print("ABOUT TO POST THE DATA")
@@ -118,31 +118,30 @@ def hotel_all(request):
         if serializer_class.is_valid():
             serializer_class.save()
             return Response(serializer_class.data, status=status.HTTP_201_CREATED)
-
+        
     return Response(serializer_class.errors, status=status.HTTP_400_BAD_REQUEST)
 
-#
+
 # Requests for singular JSON objects
-#
-# @api_view(['GET', 'PUT', 'DELETE'])
-# def weather_one(request, pk):
 
-#     try:
-#         snippet = Weather.objects.get(pk=pk)
-#     except Weather.DoesNotExist:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
+@api_view(['GET', 'PUT', 'DELETE'])
+def hotel_set_one(request, pk):
+    try:
+        snippet = Hotels.objects.get(pk=pk)
+    except Hotels.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
-#     if request.method == 'GET':
-#         serializer = WeatherSerializer(snippet)
-#         return Response(serializer.data)
+    if request.method == 'GET':
+        serializer = HotelSerializer(snippet)
+        return Response(serializer.data)
 
-#     elif request.method == 'PUT':
-#         serializer = WeatherSerializer(snippet, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'PUT':
+        serializer = HotelSerializer(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-#     elif request.method == 'DELETE':
-#         snippet.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
+    elif request.method == 'DELETE':
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

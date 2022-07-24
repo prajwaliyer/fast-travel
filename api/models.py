@@ -26,7 +26,7 @@ class Hotels(models.Model):
     country = models.CharField(max_length=250, default='')
     imgs = models.TextField(default='')
     landmarks = models.CharField(max_length=250, default='')
-    prices = models.CharField(max_length=250, default='')
+    # prices = models.CharField(max_length=250, default='')
 
     def __str__(self):
         return self.hotel

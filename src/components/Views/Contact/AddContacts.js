@@ -9,8 +9,18 @@ const AddContacts = ({ onAdd }) => {
   const [country, setCountry] = useState("");
   const [imgs, setImgs] = useState("");
   const [landmarks, setLandmarks] = useState("");
-  const [price,setPrice]=useState("")
+  // const [price,setPrice]=useState("")
+  const [cityId, setCityId] = useState(null);
+  const [search, setSearch] = useState({})
   const [table, setTable] = useState([]);
+  const [empty, setEmpty] = useState("Y");
+
+  //FINAL TEXT VARIABLES
+  const [fhotels, setFhotels] = useState([]);
+  const [fstreets, setFstreets] = useState([])
+  const [fcountry, setFcountry] = useState("")
+  const [fimgs, setFimgs] = useState([]);
+  const [flandmarks, setFlandmarks] = useState([]);
 
   useEffect(() => {
     refreshHotels();
@@ -26,7 +36,8 @@ const AddContacts = ({ onAdd }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    let item = { city, hotel, street, country, imgs, landmarks, price};
+    // let item = { city, hotel, street, country, imgs, landmarks, price};
+    let item = { city, hotel, street, country, imgs, landmarks };
     API.post("hotels/", item).then(() => refreshHotels())
     .then(function(response) {
       console.log(response);
@@ -34,9 +45,43 @@ const AddContacts = ({ onAdd }) => {
       console.log(error);
     })
   };
+//=================================================================================
+  const updated_data = () => {
+    API.get("hotels/"+cityId+"/")
+      .then((res) => {
+        setSearch(res.data);
+      })
+      .catch(console.error);
+  };
 
+  const getLastElement = () =>{
+    console.log("ATTTEMPT")
+    console.log(table[table.length-1])
+    setSearch(table[table.length-1])
+  }
+
+
+//TEXT PRE-PROCESSING
+const Split_Data = (response_list) =>{
+  console.log(response_list)
+  setFhotels(response_list.hotel.split(";"))
+  setFstreets(response_list.street.split(";"))
+  setFcountry(response_list.country.split(";")[0])
+  setFimgs(response_list.imgs.split(";"))
+  setFlandmarks(response_list.landmarks.split(";"))
+
+  //PRINTING
+  console.log(fhotels)
+  console.log(fstreets)
+  console.log(fcountry)
+  console.log(fimgs)
+  console.log(flandmarks)
+}
+
+//=================================================================================
   const onUpdate = (id) => {
-    let item = { city, hotel, street, country, imgs, landmarks, price };
+    // let item = { city, hotel, street, country, imgs, landmarks, price };
+    let item = { city, hotel, street, country, imgs, landmarks };
     API.patch(`hotels/${id}/`, item).then((res) => refreshHotels());
   };
 
@@ -52,7 +97,8 @@ const AddContacts = ({ onAdd }) => {
     setCountry(item.country);
     setImgs(item.imgs);
     setLandmarks(item.landmarks);
-    setPrice(item.price)
+    setCityId(item.id);
+    // setPrice(item.price)
   }
 
   return (
@@ -62,7 +108,6 @@ const AddContacts = ({ onAdd }) => {
           <h3 className="float-left">Find places to stay</h3>
           <Form onSubmit={onSubmit} className="mt-4">
             <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>City: </Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter City"
@@ -80,19 +125,39 @@ const AddContacts = ({ onAdd }) => {
               >
                 Search
               </Button>
-              {/* <Button
+              <Button
                 variant="primary"
-                type="button"
-                onClick={() => onUpdate(cityId)}
+                type="submit"
+                onClick={() => onDelete(cityId)}
                 className="mx-2"
               >
-                Update
-              </Button> */}
+                Refresh
+              </Button>
             </div>
           </Form>
+          <p></p>
+          Here's your potential future destination!<p></p>
+          <h5>City:</h5> {city}
+          <h5>Country:</h5> {country}
         </div>
+
         <div className="col-md-8 m">
-          <table class="table">
+          {/* .then(Split_Data(table)) */}
+          {table.slice(-1).map((hotel, index) => {
+            Split_Data(hotel)
+            console.log(fhotels)
+            console.log(fstreets)
+            console.log(fcountry)
+            console.log(fimgs)
+            console.log(flandmarks)
+            return (
+              <div>
+              {fhotels}
+              </div>
+            )
+          })}
+
+          {/* <table class="table">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -102,11 +167,61 @@ const AddContacts = ({ onAdd }) => {
                 <th scope="col">Country</th>
                 <th scope="col">imgs</th>
                 <th scope="col">landmarks</th>
-                <th scope="col">price</th>
+                {/* <th scope="col">price</th>
 
               </tr>
             </thead>
             <tbody>
+            {table.slice(-1).map((hotel, index) => {
+                console.log(hotel)
+                console.log(index)
+                console.log(table[table.length-1])
+                console.log(search)
+                return (
+                  <tr key="">
+                    <th scope="row">{hotel.id}</th>
+                    <td>{hotel.city}</td>
+                    <td>{hotel.hotel}</td>
+                    <td>{hotel.street}</td>
+                    <td>{hotel.country}</td>
+                    <td>{hotel.imgs}</td>
+                    <td>{hotel.landmarks}</td>
+
+                     <td>
+                      <Button
+                        variant="primary"
+                        type="button"
+                        onClick={() => getLastElement(table)}
+                        className="mx-2"
+                      >
+                        GET
+                      </Button>
+                      <Button
+                        variant="primary"
+                        type="button"
+                        onClick={() => onDelete(hotel.id)}
+                        className="mx-2"
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody> 
+          </table> */}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AddContacts;
+
+
+
+
+{/* <tbody>
               {table.map((hotel, index) => {
                 return (
                   <tr key="">
@@ -117,14 +232,12 @@ const AddContacts = ({ onAdd }) => {
                     <td>{hotel.country}</td>
                     <td>{hotel.imgs}</td>
                     <td>{hotel.landmarks}</td>
-                    <td>{hotel.price}</td>
 
-                    {/* <td><img src={`http://openweathermap.org/img/w/${city.icon}.png`} alt="404" /></td> */}
-                     {/* <td>
+                     <td>
                       <Button
                         variant="primary"
                         type="button"
-                        onClick={() => selectCity(city.id)}
+                        onClick={() => selectCity(hotel.id)}
                         className="mx-2"
                       >
                         Edit
@@ -132,21 +245,45 @@ const AddContacts = ({ onAdd }) => {
                       <Button
                         variant="primary"
                         type="button"
-                        onClick={() => onDelete(city.id)}
+                        onClick={() => onDelete(hotel.id)}
                         className="mx-2"
                       >
                         Delete
                       </Button>
-                    </td> */}
+                    </td>
                   </tr>
                 );
               })}
-            </tbody> 
-          </table>
-        </div>
-      </div>
-    </div>
-  );
-};
+            </tbody>  */}
 
-export default AddContacts;
+
+
+  //  {/* () => {return(
+  //               <tr key="">
+  //                     <th scope="row">{table[-1].id}</th>
+  //                     <td>{table[-1].city}</td>
+  //                     <td>{table[-1].hotel}</td>
+  //                     <td>{table[-1].street}</td>
+  //                     <td>{table[-1].country}</td>
+  //                     <td>{table[-1].imgs}</td>
+  //                     <td>{table[-1].landmarks}</td>
+  //                     <td>
+  //                       <Button
+  //                         variant="primary"
+  //                         type="button"
+  //                         onClick={() => selectCity(table[table.length-1].id)}
+  //                         className="mx-2"
+  //                       >
+  //                         Edit
+  //                       </Button>
+  //                       <Button
+  //                         variant="primary"
+  //                         type="button"
+  //                         onClick={() => onDelete(table[table.length-1].id)}
+  //                         className="mx-2"
+  //                       >
+  //                         Delete
+  //                       </Button>
+  //                     </td>
+  //             </tr>);
+  //           })

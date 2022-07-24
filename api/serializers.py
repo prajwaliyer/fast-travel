@@ -31,7 +31,8 @@ class WeatherSerializer(serializers.ModelSerializer):
 class HotelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hotels
-        fields = ('id', 'city', 'hotel', 'street', 'country', 'imgs', 'landmarks','price')
+        # fields = ('id', 'city', 'hotel', 'street', 'country', 'imgs', 'landmarks','price')
+        fields = ('id', 'city', 'hotel', 'street', 'country', 'imgs', 'landmarks')
         extra_kwargs = {
             'hotel': {
                 'allow_blank': True,
@@ -48,7 +49,7 @@ class HotelSerializer(serializers.ModelSerializer):
             'landmarks': {
                 'allow_blank': True,
             },
-            'price':{
-                'allow_blank': True,
-            },
+            # 'price':{
+            #     'allow_blank': True,
+            # },
         }
