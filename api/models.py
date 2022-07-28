@@ -27,3 +27,11 @@ class Attractions(models.Model):
     
     def __str__(self):
         return self.name
+
+class Itinerary(models.Model):
+    name = models.CharField(max_length=60, default='')
+    date = models.CharField(max_length=60, default='')
+    time = models.CharField(max_length=60, default='')
+    
+    def __str__(self):
+        return self.name
