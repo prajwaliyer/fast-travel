@@ -41,7 +41,7 @@ def attractions_all(request):
 
         # List of attractions JSON
         list_attraction_names = {}
-        for i in range(3):
+        for i in range(6):
             
             # Place Details API
             place_id = str(list_of_data_search['results'][i]['place_id'])
