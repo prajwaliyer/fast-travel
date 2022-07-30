@@ -86,7 +86,7 @@ def hotel_all(request):
         temp2=str(results[0]['address']['streetAddress'])+","+str(results[0]['address']['locality'])
         temp3=str(results[0]['address']['countryName'])
         temp4=str(results[0]['optimizedThumbUrls']['srpDesktop'])
-        temp5=str(landmarks[1]['label']+str(landmarks[2]['label']+str(landmarks[3]['label'])))
+        temp5=str(landmarks[1]['label']+";"+str(landmarks[2]['label']+";"+str(landmarks[3]['label'])))
         temp6=str(results[0]['ratePlan']['price']['current'])
 
         for j in range(1,5):

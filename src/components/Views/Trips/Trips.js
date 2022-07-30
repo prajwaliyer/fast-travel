@@ -5,7 +5,6 @@ import AddTrips from './AddTrips';
 function Trips() {
     return (
       <>
-        <Navbar />
         <AddTrips />
       </>
     );

@@ -5,7 +5,6 @@ import AddContacts from './AddContacts';
 const Contact = () => {
   return (
     <> 
-      <Navbar />
       <AddContacts />
     </>
   )

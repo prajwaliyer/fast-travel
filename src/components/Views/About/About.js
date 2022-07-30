@@ -4,7 +4,6 @@ import Navbar from '../../Navbar/Navbar'
 function About() {
   return (
     <>
-      <Navbar />
       <AddHero />
     </>
   );  
