@@ -19,8 +19,6 @@ import{
 } from './types';
 import axios from 'axios';
 
-
-
 export const checkAuthenticated = () => async dispatch => {
     if (localStorage.getItem('access')) {
         const config = {

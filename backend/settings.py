@@ -39,7 +39,6 @@ ALLOWED_HOSTS=['*']
 CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -118,45 +117,18 @@ DATABASES = {
 }
 
 # AUTH SYSTEM TESTING
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'auth_system',
-#         'USER': 'django_postgres',
-#         'PASSWORD': 'password',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
-# DATABASES = {'default': dj_database_url.config(default='postgres://postgres:postgres@localhost:5432/auth_system')}
-
-# Email: fasttravel.help@gmail.com
-#  APP PASSWORD: zmjzgaykkqkqvsxt
 # "D:\Program Files\PostgreSQL\14\bin\pg_ctl.exe" runservice -N "postgresql-x64-14" -D "D:\Program Files\PostgreSQL\14\data" -w
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'fasttravel.help@gmail.com'
-EMAIL_HOST_PASSWORD = 'zmjzgaykkqkqvsxt'
+
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 EMAIL_USE_TLS = True
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'db525h8177pluq',
-#         'USER': 'lqbefkkhhxqeoq',
-#         'PASSWORD': str(POSTGRESQL_PASSWORD),
-#         'HOST': 'ec2-54-159-22-90.compute-1.amazonaws.com',
-#         'PORT': '5432',
-#     }
-# }
-
-# db_from_env = dj_database_url.config(conn_max_age=600)
-# DATABASES['default'].update(db_from_env)
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -196,7 +168,7 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = 'static/'
-
+gi
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static')
 ]
@@ -223,9 +195,9 @@ AUTHENTICATION_BACKENDS = (
 
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),
-#    'ROTATE_REFRESH_TOKENS': False,
-#    'BLACKLIST_AFTER_ROTATION': False,
-#    'UPDATE_LAST_LOGIN': False,
+   'ROTATE_REFRESH_TOKENS': False,
+   'BLACKLIST_AFTER_ROTATION': False,
+   'UPDATE_LAST_LOGIN': False,
    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
    'AUTH_TOKEN_CLASSES':{
