@@ -65,6 +65,7 @@ export const menuData = [
     {title: "Trips", link: "/trips"},
     {title: "Itinerary", link: "/itinerary"},
     {title: "Contact", link: "/contact"},
+    {title: "Itinerary2", link: "/itinerary2"},
 ]
 
 export const NavBtn = styled.div`
