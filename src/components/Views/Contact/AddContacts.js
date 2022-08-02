@@ -158,7 +158,7 @@ const Split_Data = (response_list) =>{
           {table.slice(-1).map((hotel, index) => {
             //switch(getdata){
             //  case true:
-            if (getdata){
+            // if (getdata){
                 Split_Data(hotel);
                 console.log("REACHED HERE")
                 return (
@@ -260,13 +260,14 @@ const Split_Data = (response_list) =>{
                   
                   </div>
                   );
-                } else{
-                  return (
-                    <div>
-                      SEARCH FOR A CITY!!!
-                    </div>
-                  );
-                }
+                // } 
+                // else{
+                //   return (
+                //     <div>
+                //       SEARCH FOR A CITY!!!
+                //     </div>
+                //   );
+                // }
           })}
         </div>
       </div>

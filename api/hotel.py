@@ -46,20 +46,20 @@ def hotel_all(request):
             "X-RapidAPI-Host": "hotels4.p.rapidapi.com"
         }
 
-        # response = requests.request("GET", url, headers=headers, params=querystring)
-        # dest_id=response.json()['suggestions'][0]['entities'][0]['destinationId']
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        dest_id=response.json()['suggestions'][0]['entities'][0]['destinationId']
 
         # print("********************************************************************/n")
         # print(response.text)
         # print("********************************************************************/n")
 
         #dest_id=1506246
-        dest_id=11594
+        # dest_id=11594
         #PART 2 - GETTING THE HOTEL NAMES
         print("GOT THE DESTINATION ID", dest_id)
 
         url2 = "https://hotels4.p.rapidapi.com/properties/list"
-        querystring2 = {"destinationId":dest_id,"pageNumber":"1","pageSize":"7","checkIn":"2022-01-08","checkOut":"2022-01-15","adults1":"1","sortOrder":"PRICE","locale":"en_US","currency":"USD"}
+        querystring2 = {"destinationId":dest_id,"pageNumber":"1","pageSize":"7","checkIn":"2022-08-10","checkOut":"2022-08-15","adults1":"1","sortOrder":"STAR_RATING_HIGHEST_FIRST","locale":"en_US","currency":"USD"}
 
         response2 = requests.request("GET", url2, headers=headers, params=querystring2)
         #list_of_data=json.loads(response.json())
