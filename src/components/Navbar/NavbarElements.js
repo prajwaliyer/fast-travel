@@ -65,6 +65,12 @@ export const menuData = [
     {title: "Trips", link: "/trips"},
     {title: "Itinerary", link: "/itinerary"},
     {title: "Contact", link: "/contact"},
+    {title: "Itinerary2", link: "/itinerary2"},
+]
+
+export const homeData = [
+    {title: "About", link: "/about"},
+    {title: "Contact", link: "/contact"},
 ]
 
 export const NavBtn = styled.div`

@@ -25,6 +25,21 @@
     },
     "POSTGRESQL_PASSWORD": {
       "required": true
+    },
+    "RAPIDAPI_KEY": {
+      "required": true
+    },
+    "REACT_APP_API_URL": {
+      "required": true
+    },
+    "EMAIL_HOST_PASSWORD": {
+      "required": true
+    },
+    "MAPS_KEY": {
+      "required": true
+    },
+    "ATTRACTIONS_KEY": {
+      "required": true
     }
   },
   "formation": {
