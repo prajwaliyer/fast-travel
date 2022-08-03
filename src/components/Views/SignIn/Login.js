@@ -21,24 +21,24 @@ const Login = ({login, isAuthenticated}) => {
       login(email, password);
   };
 
-  const continueWithGoogle = async () => {
-    try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=${process.env.REACT_APP_API_URL}`)
-        console.log(res)
-        window.location.replace(res.data.authorization_url);
-    } catch (err) {
-      console.log("SHIT FAILED")
-    }
-};
+  // const continueWithGoogle = async () => {
+  //   try {
+  //       const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=${process.env.REACT_APP_API_URL}`)
+  //       console.log(res)
+  //       window.location.replace(res.data.authorization_url);
+  //   } catch (err) {
+  //     console.log("SHIT FAILED")
+  //   }
+  // };
 
   //is user auth done
   if (isAuthenticated) {
     return <Navigate to='/console' />
-    }
+  }
 
   return (
     <div className='container mt-5'>
-            <h1>Welcome to Fast Travel</h1>
+            <h2>Welcome to Fast Travel</h2>
             <p>Sign into your Account</p>
             <form onSubmit={e => onSubmit(e)}>
                 <div className='form-group'>
@@ -52,7 +52,7 @@ const Login = ({login, isAuthenticated}) => {
                         required
                     />
                 </div>
-
+                <br/>
                 <div className='form-group'>
                     <input
                         className='form-control'
@@ -69,9 +69,9 @@ const Login = ({login, isAuthenticated}) => {
                 <button className='btn btn-primary' type='submit'>Login</button>
             </form>
 
-            <button className='btn btn-danger mt-3' onClick={continueWithGoogle}>
+            {/* <button className='btn btn-danger mt-3' onClick={continueWithGoogle}>
                 Continue With Google
-            </button>
+            </button> */}
             <br />
 
             <p className='mt-3'>

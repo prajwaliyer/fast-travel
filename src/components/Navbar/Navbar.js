@@ -50,7 +50,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
         </NavMenu>
     
         <NavBtn>
-          {isAuthenticated ? <Button primary="true" round="true" to="/logout/" onClick={logout}>Logout</Button> : <Button primary="true" round="true" to="/login/">Sign In</Button>}
+          {isAuthenticated ? <Button primary="true" round="true" to="/" onClick={logout}>Logout</Button> : <Button primary="true" round="true" to="/login/">Sign In</Button>}
         </NavBtn>
 
       </Nav>

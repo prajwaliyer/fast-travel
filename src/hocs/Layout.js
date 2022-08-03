@@ -1,29 +1,26 @@
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar/Navbar';
-
 import { connect } from 'react-redux';
-import {checkAuthenticated, load_user, googleAuthenticate} from '../actions/auth';
-import { useLocation } from 'react-router-dom';
-import queryString from 'query-string';
+import {checkAuthenticated, load_user, } from '../actions/auth';
 
 const Layout = (props) => {
-    let location = useLocation();
-
+    // let location = useLocation();
     useEffect (() => {
-        const values = queryString.parse(location.search);
-        const state = values.state ? values.state : null;
-        const code = values.code ? values.code : null;
+        // const values = queryString.parse(location.search);
+        // const state = values.state ? values.state : null;
+        // const code = values.code ? values.code : null;
 
-        console.log('State: '+state)
-        console.log('Code: '+code)
+        // console.log('State: '+state)
+        // console.log('Code: '+code)
 
-        if (state && code){
-            props.googleAuthenticate(state,code);
-        } else{
-            props.checkAuthenticated();
-            props.load_user();
-        }
-    },[location]);
+        // if (state && code){
+        //     props.googleAuthenticate(state,code);
+        // } else{
+            
+        // }
+        props.checkAuthenticated();
+        props.load_user();
+    },[]);
     return (
         <div>
             <Navbar/>
@@ -32,4 +29,4 @@ const Layout = (props) => {
     );
 };
 
-export default connect(null, {checkAuthenticated, load_user, googleAuthenticate})(Layout);
+export default connect(null, {checkAuthenticated, load_user})(Layout);

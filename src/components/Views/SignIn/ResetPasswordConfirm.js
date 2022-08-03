@@ -22,7 +22,9 @@ const ResetPassword = ({reset_password_confirm }) => {
       e.preventDefault();
       const uid=params[4];
       const token=params[5];
-      reset_password_confirm(uid,token,new_password, re_new_password)
+      console.log("uid: ",uid);
+      console.log("token: ",token);
+      reset_password_confirm(uid,token,new_password, re_new_password);
       setRequestSent(true);
       
   };
@@ -33,8 +35,10 @@ const ResetPassword = ({reset_password_confirm }) => {
 
   return (
     <div className='container mt-5'>
-            <h2>Fill out the new password - Submit the form and check your email for a confirmation</h2>
+            <h2> Welcome to Password Reset</h2>
+            Submit the form and check your email for a confirmation
             <form onSubmit={e => onSubmit(e)}>
+                <br/>
                 <div className='form-group'>
                     <input
                         className='form-control'
@@ -47,6 +51,7 @@ const ResetPassword = ({reset_password_confirm }) => {
                         required
                   />
                 </div>
+                <br/>
                 <div className='form-group'>
                     <input
                         className='form-control'
@@ -60,7 +65,7 @@ const ResetPassword = ({reset_password_confirm }) => {
                   />
                 </div>
                 <p></p>
-                <button className='btn btn-primary' type='submit'>Reset Password</button>
+                <button className='btn btn-primary' to='/' type='submit'>Reset Password</button>
             </form>
         </div>
   );

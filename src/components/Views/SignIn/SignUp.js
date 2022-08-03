@@ -27,16 +27,16 @@ const Signup = ({ signup, isAuthenticated }) => {
         }
     };
 
-    const continueWithGoogle = async () => {
-      try {
-          const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=${process.env.REACT_APP_API_URL}`)
-          console.log(res.data)
-          console.log(res.data.authorization_url)
-          window.location.replace(res.data.authorization_url);
-      } catch (err) {
-          console.log(err)
-      }
-  };
+    // const continueWithGoogle = async () => {
+    //   try {
+    //       const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=${process.env.REACT_APP_API_URL}`)
+    //       console.log(res.data)
+    //       console.log(res.data.authorization_url)
+    //       window.location.replace(res.data.authorization_url);
+    //   } catch (err) {
+    //       console.log(err)
+    //   }
+    // };
 
     if (isAuthenticated) {
         return <Navigate to='/console' />
@@ -47,14 +47,14 @@ const Signup = ({ signup, isAuthenticated }) => {
 
     return (
         <div className='container mt-5'>
-            <h1>Sign Up</h1>
+            <h2>Sign Up</h2>
             <p>Create your Account</p>
             <form onSubmit={e => onSubmit(e)}>
                 <div className='form-group'>
                     <input
                         className='form-control'
                         type='text'
-                        placeholder='First Name*'
+                        placeholder='First Name'
                         name='first_name'
                         value={first_name}
                         onChange={e => onChange(e)}
@@ -66,19 +66,19 @@ const Signup = ({ signup, isAuthenticated }) => {
                     <input
                         className='form-control'
                         type='text'
-                        placeholder='Last Name*'
+                        placeholder='Last Name'
                         name='last_name'
                         value={last_name}
                         onChange={e => onChange(e)}
                         required
                     />
                 </div>
-                <p/>
+                <br/>
                 <div className='form-group'>
                     <input
                         className='form-control'
                         type='email'
-                        placeholder='Email*'
+                        placeholder='Email'
                         name='email'
                         value={email}
                         onChange={e => onChange(e)}
@@ -90,7 +90,7 @@ const Signup = ({ signup, isAuthenticated }) => {
                     <input
                         className='form-control'
                         type='password'
-                        placeholder='Password*'
+                        placeholder='Password'
                         name='password'
                         value={password}
                         onChange={e => onChange(e)}
@@ -103,7 +103,7 @@ const Signup = ({ signup, isAuthenticated }) => {
                     <input
                         className='form-control'
                         type='password'
-                        placeholder='Confirm Password*'
+                        placeholder='Confirm Password'
                         name='re_password'
                         value={re_password}
                         onChange={e => onChange(e)}
@@ -116,9 +116,9 @@ const Signup = ({ signup, isAuthenticated }) => {
             </form>
             <br />
 
-            <button className='btn btn-danger mt-3' onClick={continueWithGoogle}>
+            {/* <button className='btn btn-danger mt-3' onClick={continueWithGoogle}>
                 Continue With Google
-            </button>
+            </button> */}
 
             <p className='mt-3'>
                 Already have an account? <Link to='/login'>Sign In</Link>

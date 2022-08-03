@@ -13,8 +13,6 @@ import{
     SIGNUP_FAIL,
     ACTIVATION_SUCCESS,
     ACTIVATION_FAIL,
-    GOOGLE_AUTH_SUCCESS,
-    GOOGLE_AUTH_FAIL,
     LOGOUT
 } from './types';
 import axios from 'axios';
@@ -55,39 +53,39 @@ export const checkAuthenticated = () => async dispatch => {
     }
 };
 
-export const googleAuthenticate = (state, code) => async dispatch => {
-    if (state && code && !localStorage.getItem('access')) {
-        const config = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        };
+// export const googleAuthenticate = (state, code) => async dispatch => {
+//     if (state && code && !localStorage.getItem('access')) {
+//         const config = {
+//             headers: {
+//                 'Content-Type': 'application/x-www-form-urlencoded'
+//             }
+//         };
 
-        const details = {
-            'state': state,
-            'code': code
-        };
+//         const details = {
+//             'state': state,
+//             'code': code
+//         };
 
-        const formBody = Object.keys(details).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(details[key])).join('&');
-        console.log(formBody)
-        console.log(details)
-        console.log(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?${formBody}`)
-        try {
-            const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?${formBody}`, config);
+//         const formBody = Object.keys(details).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(details[key])).join('&');
+//         console.log(formBody)
+//         console.log(details)
+//         console.log(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?${formBody}`)
+//         try {
+//             const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?${formBody}`, config);
             
-            dispatch({
-                type: GOOGLE_AUTH_SUCCESS,
-                payload: res.data
-            });
+//             dispatch({
+//                 type: GOOGLE_AUTH_SUCCESS,
+//                 payload: res.data
+//             });
 
-            dispatch(load_user());
-        } catch (err) {
-            dispatch({
-                type: GOOGLE_AUTH_FAIL
-            });
-        }
-    }
-};
+//             dispatch(load_user());
+//         } catch (err) {
+//             dispatch({
+//                 type: GOOGLE_AUTH_FAIL
+//             });
+//         }
+//     }
+// };
 
 export const load_user = () => async dispatch => {
     if (localStorage.getItem('access')) {

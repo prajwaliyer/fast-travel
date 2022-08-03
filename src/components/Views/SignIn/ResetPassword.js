@@ -28,7 +28,7 @@ const ResetPassword = ({reset_password }) => {
 
   return (
     <div className='container mt-5'>
-            <h1>Forgot Your Password? Fast Travel To The Rescue</h1>
+            <h2>Forgot Your Password? Fast Travel To The Rescue</h2>
             <p>Enter your email and you shall receive a reset request if the account exists</p>
             <form onSubmit={e => onSubmit(e)}>
                 <div className='form-group'>
@@ -42,8 +42,8 @@ const ResetPassword = ({reset_password }) => {
                         required
                     />
                 </div>
-
-                <button className='btn btn-primary' type='submit'>Reset</button>
+                <br/>
+                <button className='btn btn-primary' to='/' type='submit'>Reset</button>
             </form>
         </div>
   );

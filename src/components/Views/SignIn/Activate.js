@@ -23,16 +23,17 @@ const Activate = ({ verify, match }) => {
         <div className='container'>
             <div 
                 className='d-flex flex-column justify-content-center align-items-center'
-                style={{ marginTop: '300px' }}
+                style={{ marginTop: '100px' }}
             >
-                <h1>Verify your Account:</h1>
+                <h2> Account Activation </h2>
+                <h3> Click the button below to verify your account</h3>
                 <button
                     onClick={verify_account}
                     style={{ marginTop: '50px' }}
                     type='button'
                     className='btn btn-primary'
                 >
-                    Verify
+                    Activate
                 </button>
             </div>
         </div>
