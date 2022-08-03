@@ -53,40 +53,6 @@ export const checkAuthenticated = () => async dispatch => {
     }
 };
 
-// export const googleAuthenticate = (state, code) => async dispatch => {
-//     if (state && code && !localStorage.getItem('access')) {
-//         const config = {
-//             headers: {
-//                 'Content-Type': 'application/x-www-form-urlencoded'
-//             }
-//         };
-
-//         const details = {
-//             'state': state,
-//             'code': code
-//         };
-
-//         const formBody = Object.keys(details).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(details[key])).join('&');
-//         console.log(formBody)
-//         console.log(details)
-//         console.log(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?${formBody}`)
-//         try {
-//             const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?${formBody}`, config);
-            
-//             dispatch({
-//                 type: GOOGLE_AUTH_SUCCESS,
-//                 payload: res.data
-//             });
-
-//             dispatch(load_user());
-//         } catch (err) {
-//             dispatch({
-//                 type: GOOGLE_AUTH_FAIL
-//             });
-//         }
-//     }
-// };
-
 export const load_user = () => async dispatch => {
     if (localStorage.getItem('access')) {
         const config = {
@@ -101,7 +67,6 @@ export const load_user = () => async dispatch => {
         console.log(config)
         try {
             const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/users/me/`, config);
-            // const res = await axios.get('http://localhost:8000/auth/users/me/', config);
             dispatch({
                 type: USER_LOADED_SUCCESS,
                 payload: res.data
@@ -132,7 +97,6 @@ export const login = (email,password) => async dispatch => {
 
     try{
         const res= await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/create/`,body, config);
-        // const res= await axios.post('http://localhost:8000/auth/jwt/create/',body, config);
         dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data
