@@ -24,16 +24,14 @@ RAPIDAPI_KEY = os.environ['RAPIDAPI_KEY']
 @api_view(['GET', 'POST', 'DELETE'])
 def hotel_all(request):
     if request.method == 'GET':
-        print("GETTTTTT REQUESTTTTT")
         queryset = Hotels.objects.all()
         serializer_class = HotelSerializer(queryset, many=True)
         return Response(serializer_class.data)
     
     # API querying on POST request
     elif request.method == 'POST':
-        print("POSTTTTT REQUESTTTT")
         city = request.data['city']
-        print("CITY: ", city)
+        # print("CITY: ", city)
         
         print("MAKING THE REQUEST")
         # PART 1 - GETTING THE DESTINATION ID
@@ -49,12 +47,8 @@ def hotel_all(request):
         response = requests.request("GET", url, headers=headers, params=querystring)
         dest_id=response.json()['suggestions'][0]['entities'][0]['destinationId']
 
-        # print("********************************************************************/n")
-        # print(response.text)
-        # print("********************************************************************/n")
-
-        #dest_id=1506246
-        # dest_id=11594
+        # EXAMPLE CITIES: dest_id=1506246(New York), dest_id=11594 (Dubai) 
+        # HARD CODE dest_id TO PREVENT RECURRING API Request During Development
         #PART 2 - GETTING THE HOTEL NAMES
         print("GOT THE DESTINATION ID", dest_id)
 
@@ -62,25 +56,12 @@ def hotel_all(request):
         querystring2 = {"destinationId":dest_id,"pageNumber":"1","pageSize":"7","checkIn":"2022-08-10","checkOut":"2022-08-15","adults1":"1","sortOrder":"STAR_RATING_HIGHEST_FIRST","locale":"en_US","currency":"USD"}
 
         response2 = requests.request("GET", url2, headers=headers, params=querystring2)
-        #list_of_data=json.loads(response.json())
-        print("********************************************************************\n")
-        print(response2.text)
-        print("********************************************************************\n")
+
         results=response2.json()['data']['body']['searchResults']['results']
         landmarks=response2.json()['data']['body']['filters']['landmarks']['items']
         
         print("SECOND REQUEST IS DONE")
-        # Populate the city's fields
-        '''
-        temp1=str(results[0]['name'])
-        temp2=str(results[0]['address']['streetAddress'])
-        temp3=str(results[0]['address']['countryName'])
-
-        for j in range(1,5):
-            temp1+=" "+str(results[j]['name'])
-            temp2+=" "+str(results[j]['address']['streetAddress'])
-            temp3+=" "+str(results[j]['address']['countryName'])
-        '''
+        
         # Populate the city's fields
         temp1=string.capwords(str(results[0]['name']))
         temp2=str(results[0]['address']['streetAddress'])+","+str(results[0]['address']['locality'])
@@ -97,22 +78,19 @@ def hotel_all(request):
             temp6+=";"+str(results[j]['ratePlan']['price']['current'])
 
         
-        print("HOTEL NAMES: ",temp1)
-        print("STREETS: ", temp2)
-        print("COUNTRY: ",temp3)
-        print("IMG SOURCE: ",temp4)
-        print("LANDMARKS: ",temp5)
-        print("PRICES: ", temp6)
+        # print("HOTEL NAMES: ",temp1)
+        # print("STREETS: ", temp2)
+        # print("COUNTRY: ",temp3)
+        # print("IMG SOURCE: ",temp4)
+        # print("LANDMARKS: ",temp5)
+        # print("PRICES: ", temp6)
 
         request.data['hotel']=temp1
         request.data['street']=temp2
         request.data['country']=temp3
         request.data['imgs']=temp4
         request.data['landmarks']=temp5
-        # request.data['price']=temp5
 
-
-        print("ABOUT TO POST THE DATA")
         # POST data
         serializer_class = HotelSerializer(data=request.data)
         if serializer_class.is_valid():

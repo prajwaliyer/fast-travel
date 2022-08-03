@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reset_password_confirm } from '../../../actions/auth';
 
@@ -26,7 +26,6 @@ const ResetPassword = ({reset_password_confirm }) => {
       console.log("token: ",token);
       reset_password_confirm(uid,token,new_password, re_new_password);
       setRequestSent(true);
-      
   };
 
   if (requestSent) {

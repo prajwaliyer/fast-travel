@@ -49,16 +49,11 @@ INSTALLED_APPS = [
     # third party
     'rest_framework',
     'corsheaders',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.google',    
     
     #own
     'djoser',
     'accounts',
     'api.apps.ApiConfig',
-    # 'apps.oauth',
 ]
 
 MIDDLEWARE = [
@@ -126,9 +121,6 @@ DATABASES = {
     }
 }
 
-# db_from_env = dj_database_url.config(conn_max_age=600)
-# DATABASES['default'].update(db_from_env)
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -157,7 +149,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

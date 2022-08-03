@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reset_password } from '../../../actions/auth';
 
@@ -16,15 +16,13 @@ const ResetPassword = ({reset_password }) => {
 
   const onSubmit = e => {
       e.preventDefault();
-      //LOGIN FUNCTION
       reset_password(email);
       setRequestSent(true);
   };
 
-  //is user auth done
   if (requestSent) {
     return <Navigate to='/' />
-    }
+  }
 
   return (
     <div className='container mt-5'>
