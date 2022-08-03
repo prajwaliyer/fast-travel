@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Button } from '../Button/ButtonElements';
-import { Nav, NavLink, Bars, NavMenu, menuData, NavBtn, themeHome, themeOther } from './NavbarElements';
+import { Nav, NavLink, Bars, NavMenu, menuData, NavBtn, themeHome, themeOther, homeData } from './NavbarElements';
 import { useLocation } from 'react-router-dom';
 
-const Navbar = () => {
+import { connect } from 'react-redux';
+import { logout } from '../../actions/auth';
+
+const Navbar = ({ logout, isAuthenticated }) => {
 
   // Choose theme
   let location = useLocation();
@@ -29,19 +32,36 @@ const Navbar = () => {
         <NavLink to="/"><b>FAST TRAVEL</b></NavLink>
         <Bars />
         <NavMenu>
-          {menuData.map((item, index) => (
-            <NavLink to={item.link} key={index}>
-              {item.title}
-            </NavLink>
-          ))}
+          {isAuthenticated ? 
+            (
+              menuData.map((item, index) => (
+                <NavLink to={item.link} key={index}>
+                  {item.title}
+                </NavLink>
+              ))
+            ) : ( 
+              homeData.map((item, index) => (
+                <NavLink to={item.link} key={index}>
+                  {item.title}
+                </NavLink>
+              ))
+            )
+          }
         </NavMenu>
+    
         <NavBtn>
-          <Button primary="true" round="true" to="/sign-in/">Sign In</Button>
+          {isAuthenticated ? <Button primary="true" round="true" to="/" onClick={logout}>Logout</Button> : <Button primary="true" round="true" to="/login/">Sign In</Button>}
         </NavBtn>
+
       </Nav>
       </ThemeProvider>
     </>
   )
 }
 
-export default Navbar
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { logout })(Navbar);
+// export default Navbar

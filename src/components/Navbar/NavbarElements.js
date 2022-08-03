@@ -68,6 +68,11 @@ export const menuData = [
     {title: "Itinerary2", link: "/itinerary2"},
 ]
 
+export const homeData = [
+    {title: "About", link: "/about"},
+    {title: "Contact", link: "/contact"},
+]
+
 export const NavBtn = styled.div`
     display: flex;
     align-items: center;

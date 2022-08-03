@@ -4,7 +4,6 @@ import Hero from "../../Hero/Hero";
 const Home = () => {
   return (
     <>
-      <Navbar/>
       <Hero/>
     </>
   )

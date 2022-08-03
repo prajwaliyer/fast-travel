@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Attractions, Hero, Weather, Itinerary
+from .models import Attractions, Hero, Weather, Itinerary, Hotels
 
 class HeroSerializer(serializers.ModelSerializer):
     class Meta:
@@ -49,4 +49,30 @@ class ItinerarySerializer(serializers.ModelSerializer):
             'time': {
                 'allow_blank': True,
             },
+        }
+
+class HotelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Hotels
+        # fields = ('id', 'city', 'hotel', 'street', 'country', 'imgs', 'landmarks','price')
+        fields = ('id', 'city', 'hotel', 'street', 'country', 'imgs', 'landmarks')
+        extra_kwargs = {
+            'hotel': {
+                'allow_blank': True,
+            },
+            'street': {
+                'allow_blank': True,
+            },
+            'country': {
+                'allow_blank': True,
+            },
+            'imgs': {
+                'allow_blank': True,
+            },
+            'landmarks': {
+                'allow_blank': True,
+            },
+            # 'price':{
+            #     'allow_blank': True,
+            # },
         }

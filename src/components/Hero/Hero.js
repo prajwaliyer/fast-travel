@@ -13,7 +13,7 @@ const Hero = () => {
           <HeroItems>
             <HeroH1>Fast Travel</HeroH1>
             <HeroP>Find all your travel needs in one place</HeroP>
-            <Button primary="true" big="true" round="true" to="/sign-in">Start planning</Button>
+            <Button primary="true" big="true" round="true" to="/login">Start planning</Button>
           </HeroItems>
         </HeroContent>
     </HeroContainer>
